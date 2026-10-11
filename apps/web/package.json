@@ -1,0 +1,42 @@
+{
+  "name": "@medconz/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "dotenv -e ../../.env -- next dev -p 3100",
+    "build": "dotenv -e ../../.env -- next build",
+    "start": "dotenv -e ../../.env -- next start -H 0.0.0.0 -p 3100",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx ./scripts/migrate.ts",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.693.0",
+    "@aws-sdk/s3-request-presigner": "^3.693.0",
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@medconz/db": "0.1.0",
+    "@medconz/i18n": "0.1.0",
+    "@medconz/ui": "0.1.0",
+    "better-auth": "^1.2.4",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.4",
+    "next": "^14.2.35",
+    "postgres": "^3.4.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "dotenv-cli": "^11.0.0",
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}

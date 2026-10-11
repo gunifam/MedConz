@@ -1,0 +1,34 @@
+# MedConz local stack. Requires Docker Desktop when you want containers.
+# Dev without Docker: run Postgres natively + `npm run dev`.
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: medconz
+      POSTGRES_USER: medconz
+      POSTGRES_PASSWORD: medconz
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  # Self-hosted LiveKit (optional for now; you can also use LiveKit Cloud free tier)
+  livekit:
+    image: livekit/livekit-server:v1.8
+    restart: unless-stopped
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
+    command: --dev
+    profiles: ["realtime"]
+
+volumes:
+  pgdata:

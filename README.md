@@ -30,10 +30,15 @@ BETTER_AUTH_SECRET=<set a real 32+ char secret before any shared testing>
 
 ```powershell
 npm.cmd install
+npm.cmd run build:packages                     # compile @medconz/* to dist (required before dev/build)
 npm.cmd run db:generate --workspace=@medconz/web   # after schema edits
 npm.cmd run db:migrate --workspace=@medconz/web
 npm.cmd run dev                                     # http://localhost:3100
 ```
+
+Workspace packages (`@medconz/db|ui|i18n`) ship compiled `dist/` (esbuild
+bundle + `.d.ts`). Re-run `build:packages` after editing anything under
+`packages/*/src`. Netlify chains this automatically (see `netlify.toml`).
 
 MedConz runs on port **3100** (port 3000 belongs to another app on this PC —
 see `ConzMed`). Auth and callbacks are configured for 3100 in `.env`

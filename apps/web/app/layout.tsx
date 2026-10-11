@@ -6,6 +6,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "MedConz",
   description: "Symptom check, timeline and paid consultation",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icons/icon-192.png",
+    apple: "/icons/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "MedConz",
+    statusBarStyle: "default",
+  },
 };
 
 export const viewport: Viewport = {

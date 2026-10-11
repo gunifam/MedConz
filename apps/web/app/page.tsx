@@ -1,4 +1,5 @@
 import { EmergencyBanner } from "@medconz/ui";
+import { InstallButton } from "@/components/install-button";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <div className="mc-row">
           <a className="mc-btn mc-btn-primary" href="/check">Start a symptom check</a>
           <a className="mc-btn mc-btn-quiet" href="/login">Sign in</a>
+          <InstallButton />
         </div>
       </section>
 

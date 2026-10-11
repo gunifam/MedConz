@@ -18,6 +18,7 @@
     "@capacitor/android": "^8.5.3",
     "@capacitor/cli": "^8.5.3",
     "@capacitor/core": "^8.5.3",
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@medconz/db": "0.1.0",
     "@medconz/i18n": "0.1.0",
     "@medconz/ui": "0.1.0",
@@ -38,6 +39,7 @@
     "@types/react-dom": "^18.3.1",
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.4",
+    "sharp": "^0.35.5",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   }

@@ -11,16 +11,6 @@ export default function Home() {
         <div>Emergency info is always free and always shown — no login needed.</div>
       </EmergencyBanner>
 
-      <div className="card">
-        <h2>Stack status</h2>
-        <ul>
-          <li>DB: local Postgres via DATABASE_URL</li>
-          <li>Auth: BetterAuth at /api/auth/*</li>
-          <li>Storage: Cloudflare R2 (see lib/r2.ts)</li>
-          <li>No Supabase, no Vercel</li>
-        </ul>
-      </div>
-
       <QuestionCard title="What is wrong today?">
         <AnswerButton>Tap answers go here (Phase 4)</AnswerButton>
       </QuestionCard>

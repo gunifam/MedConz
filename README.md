@@ -132,14 +132,18 @@ Toolchain installed on this PC: JDK 17 + 21, Android SDK at `C:\Android`
 
 ## Routes (all phases)
 
-Pages: `/`, `/design`, `/signup`, `/login`, `/privacy`, `/access`,
-`/check`, `/check/:id`, `/check/done/:id`, `/pay/:checkId`, `/pay/receipt/:id`,
-`/queue`, `/doctor`, `/doctor/:id`, `/doctor/visits`,
-`/visits`, `/visits/:id`, `/timeline`, `/share`, `/s/:id`.
-APIs: `/api/auth/*`, `/api/health`, `/api/consent`, `/api/access-log`,
+Pages: `/`, `/design`, `/signup`, `/login`, `/forgot-password`, `/reset-password`,
+`/privacy`, `/access`, `/profile/edit`,
+`/check`, `/check/guest`, `/check/finish`, `/check/:id`, `/check/done/:id`,
+`/pay/:checkId`, `/pay/receipt/:id`, `/payments/history`,
+`/queue`, `/doctor`, `/doctor/start`, `/doctor/:id`, `/doctor/visits`,
+`/visits`, `/visits/:id`, `/timeline`, `/share`, `/s/:id`,
+`/legal/privacy`, `/legal/terms`, `/offline`.
+APIs: `/api/auth/*`, `/api/health`, `/api/public/doctors`, `/api/consent`,
+`/api/access-log`,
 `GET+POST /api/checks`, `GET+PATCH /api/checks/:id`,
 `POST /api/checks/:id/submit`, `POST /api/checks/:id/accuracy`,
-`PATCH /api/profile`,
+`PATCH /api/profile` (name, language),
 `GET /api/payments/quote`, `POST /api/payments/start`,
 `GET+POST /api/payments/:id`, `POST /api/payments/:id/confirm`,
 `GET /api/payments`, `GET /api/queue`, `GET /api/queue/list`,

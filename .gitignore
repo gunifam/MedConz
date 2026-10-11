@@ -7,6 +7,7 @@ dist/
 .env.local
 .env.*.local
 pgdata/
+.netlify/
 tsconfig.tsbuildinfo
 # Android / APK build outputs (regenerate anytime, never commit binaries)
 *.apk

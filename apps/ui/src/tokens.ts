@@ -135,7 +135,6 @@ body{background:var(--mc-bg);color:var(--mc-ink);font-family:var(--mc-font);-web
 .mc-tab{flex:1;min-height:62px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--mc-muted);text-decoration:none;background:none;border:none;cursor:pointer;padding:8px 2px;position:relative}
 .mc-tab[aria-current=page]{color:var(--mc-primary-dark)}
 .mc-tab[aria-current=page]::before{content:"";position:absolute;top:0;left:24%;right:24%;height:3px;border-radius:0 0 4px 4px;background:var(--mc-primary)}
-body{padding-bottom:80px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (prefers-contrast:more){.mc-card,.mc-chip,.mc-btn{border-width:3px}}
 `;

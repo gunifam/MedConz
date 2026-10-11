@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { MedConzStyles } from "@medconz/ui";
-import { MobileTabs } from "@/components/mobile-tabs";
 import { TopBar } from "@/components/top-bar";
 import "./globals.css";
 
@@ -32,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MedConzStyles />
         <TopBar />
         {children}
-        <MobileTabs />
       </body>
     </html>
   );

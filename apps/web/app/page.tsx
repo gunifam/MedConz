@@ -15,11 +15,20 @@ export default function Home() {
         <p>Answer a few questions, pay once with no hidden charges, and join the line. Your answers go straight to your doctor.</p>
         <div className="mc-row">
           <a className="mc-btn mc-btn-primary" href="/check">Start a symptom check</a>
-          <a className="mc-btn mc-btn-quiet" href="/login">Sign in</a>
           <InstallButton />
         </div>
       </section>
 
+      <section className="mc-auth-card" aria-label="Your account">
+        <h2>Your account</h2>
+        <div className="mc-row" style={{ justifyContent: "center" }}>
+          <a className="mc-btn mc-btn-primary" href="/login">Sign in</a>
+          <a className="mc-btn" href="/signup">Sign up</a>
+        </div>
+        <p className="mc-muted">New here? Sign up takes a minute. Returning? Welcome back.</p>
+      </section>
+
+      <p className="mc-section-label">Explore</p>
       <div className="mc-actions">
         <a className="mc-action" href="/check">
           <strong>Check symptoms</strong>
@@ -39,12 +48,11 @@ export default function Home() {
         </a>
       </div>
 
-      <nav className="mc-row" aria-label="Account">
-        <a className="mc-btn mc-btn-quiet" href="/signup">Create account</a>
+      <p className="mc-section-label">More</p>
+      <nav className="mc-row" aria-label="More">
         <a className="mc-btn mc-btn-quiet" href="/doctor">I am a doctor</a>
         <a className="mc-btn mc-btn-quiet" href="/privacy">Privacy</a>
         <a className="mc-btn mc-btn-quiet" href="/access">Access record</a>
-        <a className="mc-btn mc-btn-quiet" href="/design">Design system</a>
       </nav>
     </main>
   );

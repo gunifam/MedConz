@@ -39,7 +39,7 @@ export default function SignupPage() {
 
   return (
     <main>
-      <h1>Create your account</h1>
+      <h1>Sign up</h1>
       <form onSubmit={submit} className="mc-card">
         <label>
           Your name

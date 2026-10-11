@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import { clearLocalDrafts } from "@/lib/checks/drafts";
+import { usePathname } from "next/navigation";
 
 const TABS = [
   { href: "/", label: "Home" },
@@ -21,13 +19,6 @@ function isActive(path: string, href: string): boolean {
 /** Permanent bottom tab bar — on every page, always a way back home. */
 export function MobileTabs() {
   const path = usePathname();
-  const router = useRouter();
-
-  async function logout() {
-    clearLocalDrafts(); // shared-phone safety: drafts never survive logout
-    await authClient.signOut();
-    router.push("/login");
-  }
 
   return (
     <nav className="mc-tabs" aria-label="Main">
@@ -41,9 +32,6 @@ export function MobileTabs() {
           {t.label}
         </Link>
       ))}
-      <button type="button" className="mc-tab" onClick={logout}>
-        Logout
-      </button>
     </nav>
   );
 }

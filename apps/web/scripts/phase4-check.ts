@@ -1,7 +1,7 @@
 import { classifyBranch, CONTENT_VERSION } from "../lib/checks/content";
 import { evaluateEmergency } from "../lib/checks/emergency";
 import { suggestSpecialty } from "../lib/checks/specialty";
-import { t } from "../../../packages/i18n/src/index";
+import { t } from "../../i18n/src/index";
 
 let fails = 0;
 const check = (name: string, cond: boolean) => {
@@ -26,7 +26,7 @@ check("doctor suggested", suggestSpecialty("headache and fever").code === "docto
 
 // i18n completeness: every key in all 4 languages, non-empty
 for (const lang of ["en", "ha", "yo", "ig"]) {
-  const { en } = await import("../../../packages/i18n/src/en");
+  const { en } = await import("../../i18n/src/en");
   for (const k of Object.keys(en) as (keyof typeof en)[]) {
     const v = t(lang, k);
     if (!v || v.trim().length === 0) {

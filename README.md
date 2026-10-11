@@ -109,24 +109,20 @@ or keep using native 5433 (recommended for now).
 
 ## APK (Android, Capacitor shell)
 
-`medconz-debug.apk` in this folder is a debug build that loads the dev
-server over WiFi. The phone and this PC must be on the **same WiFi**.
+`medconz-debug.apk` in this folder (v1.1) loads the **live site** —
+install it on any Android phone with internet, no PC needed.
 
-1. Keep the server running: `npm.cmd run start` (or `dev`) — it serves `:3100`.
-2. If the phone cannot reach `http://10.251.191.190:3100`, allow it once in an
-   **admin** terminal:
-   `netsh advfirewall firewall add rule name="MedConz 3100" dir=in action=allow protocol=tcp localport=3100`
-3. Copy `medconz-debug.apk` to the phone (USB/Bluetooth/Drive) and install
+1. Copy `medconz-debug.apk` to the phone (USB/Bluetooth/Drive) and install
    (allow "install unknown apps" once). Or: `C:\Android\platform-tools\adb.exe install medconz-debug.apk`.
-4. Sign up / use the app normally. Auth accepts the LAN origin via
-   `TRUSTED_ORIGINS` in `.env`.
+2. Use the app normally (sign up, check, pay, queue, doctor, visits).
 
-Rebuild after app changes: `npm.cmd run build`, then in
+Rebuild after native changes: `npx cap sync android`, then in
 `apps/web/android` run `gradlew assembleDebug` with `JAVA_HOME` = JDK 21
 (see `C:\Users\HomePC\AppData\Local\Temp\opencode\build_apk.ps1`), then copy
-the fresh `app-debug.apk` over `medconz-debug.apk`.
-If this PC's WiFi IP changes, update `MEDCONZ_DEV_HOST`/`TRUSTED_ORIGINS` in
-`.env` and `capacitor.config.ts`, then `npx cap sync android` + rebuild.
+the fresh `app-debug.apk` over `medconz-debug.apk`. Bump `versionCode` in
+`android/app/build.gradle` each release.
+To point the APK at a dev server instead (same WiFi): set `MEDCONZ_APP_URL`
+in `capacitor.config.ts`, re-sync, rebuild.
 
 Production APK later: hosted https backend in `server.url`, release signing
 key, real app icon/splash, version bump in `android/app/build.gradle`.

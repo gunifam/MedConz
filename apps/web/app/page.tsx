@@ -1,4 +1,5 @@
 import { EmergencyBanner } from "@medconz/ui";
+import { BrandLockup } from "@/components/brand";
 import { InstallButton } from "@/components/install-button";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
       </EmergencyBanner>
 
       <section className="mc-hero">
-        <span className="mc-eyebrow">MedConz — doctors & dentists</span>
+        <BrandLockup />
         <h1>See a doctor or dentist today.</h1>
         <p>Answer a few questions, pay once with no hidden charges, and join the line. Your answers go straight to your doctor.</p>
         <div className="mc-row">

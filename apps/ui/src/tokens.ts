@@ -112,6 +112,9 @@ body{background:var(--mc-bg);color:var(--mc-ink);font-family:var(--mc-font);-web
 .mc-hero h1{margin:0 0 10px;font-size:32px;line-height:1.2;letter-spacing:-.02em}
 .mc-hero p{margin:0 0 20px;font-size:var(--mc-base);opacity:.92;max-width:46ch}
 .mc-eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.mc-brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.mc-brand-name{font-size:32px;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1}
+.mc-brand-sub{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-top:5px}
 .mc-hero .mc-btn-primary{background:#fff;border-color:#fff;color:var(--mc-primary-dark);box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .mc-hero .mc-btn-quiet{background:transparent;border-color:rgba(255,255,255,.6);color:#fff}
 .mc-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:${tokens.maxContentWidth}px;margin:0 0 8px}

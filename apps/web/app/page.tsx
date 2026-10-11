@@ -33,8 +33,8 @@ function DoctorCard() {
       <h2>Are you a doctor or dentist?</h2>
       <p className="mc-muted">Join MedConz and start taking consultations.</p>
       <div className="mc-row">
-        <a className="mc-btn mc-btn-quiet" href="/login">Doctor sign in</a>
-        <a className="mc-btn" href="/signup?role=doctor">Join as a doctor</a>
+        <a className="mc-btn mc-btn-quiet" href="/doctor/start">Doctor sign in</a>
+        <a className="mc-btn" href="/signup?role=doctor&locked=doctor">Join as a doctor</a>
       </div>
     </section>
   );

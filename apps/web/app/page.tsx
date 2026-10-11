@@ -6,6 +6,7 @@ import { user } from "@medconz/db";
 import { EmergencyBanner } from "@medconz/ui";
 import { BrandLockup } from "@/components/brand";
 import { InstallButton } from "@/components/install-button";
+import { SiteFooter } from "@/components/site-footer";
 
 async function doctorCount(): Promise<number> {
   try {
@@ -73,6 +74,8 @@ export default async function Home() {
         </section>
 
         <DoctorCard />
+
+        <SiteFooter />
       </main>
     );
   }
@@ -130,6 +133,8 @@ export default async function Home() {
       ) : (
         <DoctorCard />
       )}
+
+      <SiteFooter />
     </main>
   );
 }

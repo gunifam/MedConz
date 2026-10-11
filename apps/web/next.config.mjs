@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@medconz/db", "@medconz/ui", "@medconz/i18n"],
   async headers() {
     return [
       {

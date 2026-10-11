@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npm run dev --workspace=apps/web",
     "build": "npm run build --workspace=apps/web",
+    "build:packages": "npm run build --workspace=@medconz/db && npm run build --workspace=@medconz/ui && npm run build --workspace=@medconz/i18n",
     "db:generate": "npm run db:generate --workspace=apps/web",
     "db:migrate": "npm run db:migrate --workspace=apps/web",
     "db:studio": "npm run db:studio --workspace=apps/web"

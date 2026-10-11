@@ -3,10 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "esbuild src/index.tsx --bundle --platform=node --format=esm --outfile=dist/index.js --external:react --external:react-dom && tsc -p tsconfig.json",
+    "clean": "rm -rf dist"
+  },
   "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.3"
   }
 }

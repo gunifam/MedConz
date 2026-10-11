@@ -1,8 +1,9 @@
 # Netlify: auto-deploy from GitHub. Production = main branch,
 # previews = every other branch/push.
+# Packages compile first so the function bundle only ever sees plain JS.
 [build]
   base = "apps/web"
-  command = "npm run build"
+  command = "npm run build --workspace=@medconz/db && npm run build --workspace=@medconz/ui && npm run build --workspace=@medconz/i18n && npm run build"
   publish = ".next"
 
 [build.environment]

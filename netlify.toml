@@ -1,11 +1,11 @@
 # Netlify: auto-deploy from GitHub. Production = main branch,
 # previews = every other branch/push.
 # Packages compile first so the function bundle only ever sees plain JS.
-# NOTE: publish is relative to the REPO ROOT (where this file lives), not
-# to base. The function bundle expects the app at /var/task/apps/web.
+# NOTE: base stays "." (repo root). The function bundle addresses the app
+# at its repo-relative path (/var/task/apps/web); narrowing base breaks that.
 [build]
-  base = "apps/web"
-  command = "npm run build --workspace=@medconz/db && npm run build --workspace=@medconz/ui && npm run build --workspace=@medconz/i18n && npm run build"
+  base = "."
+  command = "npm run build --workspace=@medconz/db && npm run build --workspace=@medconz/ui && npm run build --workspace=@medconz/i18n && npm run build --workspace=@medconz/web"
   publish = "apps/web/.next"
 
 [build.environment]

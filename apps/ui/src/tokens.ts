@@ -86,6 +86,10 @@ export const uiCss = `
 .mc-select,.mc-input{min-height:var(--mc-tap);font-size:var(--mc-base);border-radius:8px;border:2px solid var(--mc-line);padding:10px 12px;background:var(--mc-surface);color:var(--mc-ink)}
 .mc-check{display:flex;gap:12px;align-items:flex-start;font-size:var(--mc-base);line-height:${tokens.lineHeight}}
 .mc-check input{width:28px;height:28px;min-width:28px;accent-color:var(--mc-primary);margin-top:2px}
+.mc-tabs{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--mc-surface);border-top:2px solid var(--mc-line);z-index:40;padding-bottom:env(safe-area-inset-bottom)}
+.mc-tab{flex:1;min-height:60px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mc-muted);text-decoration:none;background:none;border:none;cursor:pointer;padding:8px 2px}
+.mc-tab[aria-current=page]{color:var(--mc-primary);font-weight:700}
+body{padding-bottom:78px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (prefers-contrast:more){.mc-card,.mc-chip,.mc-btn{border-width:3px}}
 `;

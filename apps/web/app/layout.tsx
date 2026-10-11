@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MedConzStyles } from "@medconz/ui";
+import { MobileTabs } from "@/components/mobile-tabs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <MedConzStyles />
         {children}
+        <MobileTabs />
       </body>
     </html>
   );

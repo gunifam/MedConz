@@ -47,8 +47,9 @@ export function ProfileMenu() {
             <strong>{user.name ?? "Patient"}</strong>
             <div className="mc-muted">{user.email ?? ""}{user.role && user.role !== "patient" ? ` · ${user.role}` : ""}</div>
           </div>
-          <a href="/timeline" onClick={() => setOpen(false)}>Timeline</a>
-          <a href="/visits" onClick={() => setOpen(false)}>Visits</a>
+          <a href="/profile/edit" onClick={() => setOpen(false)}>Edit profile</a>
+          <a href="/payments/history" onClick={() => setOpen(false)}>Payment history</a>
+          <a href="/payments/history?show=refunds" onClick={() => setOpen(false)}>Refund history</a>
           <a href="/share" onClick={() => setOpen(false)}>Share</a>
           <a href="/privacy" onClick={() => setOpen(false)}>Privacy</a>
           <a href="/access" onClick={() => setOpen(false)}>Access record</a>

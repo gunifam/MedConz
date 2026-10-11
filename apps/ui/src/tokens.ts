@@ -100,8 +100,11 @@ body{background:var(--mc-bg);color:var(--mc-ink);font-family:var(--mc-font);-web
 .mc-auth-card{background:linear-gradient(180deg,var(--mc-tint),var(--mc-surface));border:1px solid var(--mc-line);border-radius:var(--mc-radius);padding:22px;margin:20px 0;max-width:${tokens.maxContentWidth}px;box-shadow:${tokens.shadowCard};text-align:center}
 .mc-auth-card h2{font-size:var(--mc-base);margin:0 0 12px}
 .mc-section-label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mc-muted);margin:26px 0 4px}
-.mc-profile-wrap{position:fixed;top:12px;right:12px;z-index:60}
-.mc-profile-btn{width:52px;height:52px;border-radius:50%;border:2px solid var(--mc-primary);background:linear-gradient(180deg,var(--mc-primary),var(--mc-primary-dark));color:#fff;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(14,124,107,.4);display:flex;align-items:center;justify-content:center}
+.mc-profile-btn{width:52px;height:52px;border-radius:50%;border:2px solid var(--mc-primary);background:linear-gradient(180deg,var(--mc-primary),var(--mc-primary-dark));color:#fff;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(14,124,107,.4);display:flex;align-items:center;justify-content:center;flex:none}
+.mc-topbar{position:sticky;top:0;z-index:55;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--mc-line)}
+.mc-topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--mc-ink);font-size:20px;font-weight:800;letter-spacing:-.02em}
+.mc-topbar .mc-profile-wrap{position:relative;top:auto;right:auto}
+.mc-topbar .mc-profile-btn{width:44px;height:44px;font-size:18px}
 .mc-profile-panel{position:absolute;top:60px;right:0;background:var(--mc-surface);border:1px solid var(--mc-line);border-radius:var(--mc-radius);box-shadow:${tokens.shadowCard};min-width:240px;padding:8px}
 .mc-profile-panel .mc-name{padding:10px 12px;border-bottom:1px solid var(--mc-line);margin-bottom:4px}
 .mc-profile-panel a{display:block;padding:12px;color:var(--mc-ink);text-decoration:none;border-radius:10px;font-size:var(--mc-base)}

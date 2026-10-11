@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const params = useSearchParams();
+  const next = params.get("next") || "/privacy";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,7 +20,7 @@ export default function LoginPage() {
       setError(res.error.message ?? "Could not sign you in.");
       return;
     }
-    router.push("/privacy");
+    router.push(next);
   }
 
   return (
@@ -47,8 +49,16 @@ export default function LoginPage() {
         <a className="mc-link" href="/forgot-password">Forgot password?</a>
       </p>
       <p>
-        No account yet? <a className="mc-link" href="/signup">Create one</a>.
+        No account yet? <a className="mc-link" href={`/signup?next=${encodeURIComponent(next)}`}>Sign up</a>.
       </p>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

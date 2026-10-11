@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ConsentCheckbox } from "@medconz/ui";
 import { authClient } from "@/lib/auth-client";
 
-export default function SignupPage() {
+function SignupForm() {
   const router = useRouter();
+  const params = useSearchParams();
+  const next = params.get("next") || "/privacy";
+  const initialRole = params.get("role") === "doctor" || params.get("role") === "dentist" ? params.get("role") as string : "patient";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("patient");
+  const [role, setRole] = useState(initialRole);
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
 
@@ -34,12 +37,12 @@ export default function SignupPage() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ action: "accept" }),
     });
-    router.push("/privacy");
+    router.push(next);
   }
 
   return (
     <main>
-      <h1>Sign up</h1>
+      <h1>Sign up{role === "doctor" ? " as a doctor" : role === "dentist" ? " as a dentist" : ""}</h1>
       <form onSubmit={submit} className="mc-card">
         <label>
           Your name
@@ -78,9 +81,20 @@ export default function SignupPage() {
         {error ? <p role="alert">{error}</p> : null}
         <br />
         <button type="submit" className="mc-btn mc-btn-primary">
-          Create account
+          Sign up
         </button>
       </form>
+      <p>
+        Have an account? <a className="mc-link" href={`/login?next=${encodeURIComponent(next)}`}>Sign in</a>.
+      </p>
     </main>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense>
+      <SignupForm />
+    </Suspense>
   );
 }

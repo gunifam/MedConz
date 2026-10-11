@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EmergencyBanner, InfoBanner, LanguageSwitcher, QuestionCard } from "@medconz/ui";
 import { t, type Lang } from "@medconz/i18n";
 import { EMERGENCY_NUMBERS, HOSPITAL_NOTE } from "@/lib/checks/content";
 import { evaluateEmergency } from "@/lib/checks/emergency";
+import { loadGuest, saveGuest } from "@/lib/checks/drafts";
 
 export type DraftItem = { id: string; complaint: string; updatedAt: string };
 
@@ -15,7 +16,7 @@ const WALK: { title: string; body: string }[] = [
   { title: "Not a diagnosis", body: "This check never diagnoses. A doctor reviews your answers. In an emergency, call for help now." },
 ];
 
-export function StartForm({ initialLang, drafts }: { initialLang: string; drafts: DraftItem[] }) {
+export function StartForm({ initialLang, drafts, authed }: { initialLang: string; drafts: DraftItem[]; authed: boolean }) {
   const router = useRouter();
   const [lang, setLang] = useState<Lang>((initialLang as Lang) ?? "en");
   const [walk, setWalk] = useState(() => {
@@ -32,6 +33,16 @@ export function StartForm({ initialLang, drafts }: { initialLang: string; drafts
   const [adultProof, setAdultProof] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [guestSaved, setGuestSaved] = useState<null | { when: string }>(null);
+
+  useEffect(() => {
+    // Signed in with a phone-saved guest check? Offer to finish it.
+    if (!authed) return;
+    try {
+      const g = loadGuest();
+      if (g?.complaint) setGuestSaved({ when: g.updatedAt });
+    } catch { /* ignore */ }
+  }, [authed]);
 
   const flags = useMemo(() => evaluateEmergency({ text: complaint }), [complaint]);
 
@@ -59,15 +70,28 @@ export function StartForm({ initialLang, drafts }: { initialLang: string; drafts
       }
     }
     setBusy(true);
+    const caregiver = forSelf
+      ? { forSelf: true }
+      : { forSelf: false, relationship, minorTick, adultProof };
+    if (!authed) {
+      // Guest mode: everything stays on this phone until sign in/up.
+      saveGuest({
+        complaint: complaint.trim(),
+        language: lang,
+        caregiver,
+        answers: {},
+        updatedAt: new Date().toISOString(),
+      });
+      router.push("/check/guest");
+      return;
+    }
     const res = await fetch("/api/checks", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         complaint: complaint.trim(),
         language: lang,
-        caregiver: forSelf
-          ? { forSelf: true }
-          : { forSelf: false, relationship, minorTick, adultProof },
+        caregiver,
       }),
     });
     const data = (await res.json().catch(() => ({}))) as { id?: string; error?: string };
@@ -115,6 +139,16 @@ export function StartForm({ initialLang, drafts }: { initialLang: string; drafts
       </EmergencyBanner>
 
       <InfoBanner>{t(lang, "honesty")}</InfoBanner>
+
+      {guestSaved ? (
+        <section className="mc-card" aria-label="Saved check on this phone">
+          <h2>Finish your saved check</h2>
+          <p className="mc-muted">You started a check on this phone before signing in.</p>
+          <button type="button" className="mc-btn mc-btn-primary" onClick={() => router.push("/check/finish")}>
+            {t(lang, "continue")}
+          </button>
+        </section>
+      ) : null}
 
       {drafts.length > 0 ? (
         <section className="mc-card" aria-label={t(lang, "resume_title")}>

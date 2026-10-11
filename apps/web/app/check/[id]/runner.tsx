@@ -22,7 +22,7 @@ import {
   type ChipQ,
 } from "@/lib/checks/content";
 import { confirmQuestions, evaluateEmergency } from "@/lib/checks/emergency";
-import { loadLocalDraft, saveLocalDraft } from "@/lib/checks/drafts";
+import { loadLocalDraft, saveGuest, saveLocalDraft } from "@/lib/checks/drafts";
 
 type Answers = Record<string, unknown>;
 type Step =
@@ -55,11 +55,13 @@ export function Runner({
   complaint,
   language,
   initialAnswers,
+  guest = false,
 }: {
   checkId: string;
   complaint: string;
   language: string;
   initialAnswers: Answers;
+  guest?: boolean;
 }) {
   const router = useRouter();
   const lang = (language as Lang) ?? "en";
@@ -92,8 +94,19 @@ export function Runner({
     };
   }, []);
 
-  // Autosave (debounced): server first, local mirror always.
+  // Autosave: server (+ local mirror) when signed in, phone-only as guest.
   useEffect(() => {
+    if (guest) {
+      saveGuest({
+        complaint,
+        language,
+        caregiver: (initialAnswers.caregiver ?? { forSelf: true }) as Record<string, unknown>,
+        answers,
+        updatedAt: new Date().toISOString(),
+      });
+      setSavedTick((n) => n + 1);
+      return;
+    }
     saveLocalDraft(checkId, { id: checkId, complaint, answers, updatedAt: new Date().toISOString() });
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(async () => {
@@ -135,6 +148,18 @@ export function Runner({
 
   async function send() {
     setError("");
+    if (guest) {
+      // Next stage needs an account: sign in/up, then we finish server-side.
+      saveGuest({
+        complaint,
+        language,
+        caregiver: (initialAnswers.caregiver ?? { forSelf: true }) as Record<string, unknown>,
+        answers,
+        updatedAt: new Date().toISOString(),
+      });
+      router.push("/signup?next=/check/finish");
+      return;
+    }
     setBusy(true);
     try {
       await fetch(`/api/checks/${checkId}`, {
@@ -296,7 +321,13 @@ export function Runner({
       ) : null}
 
       {step.kind === "review" ? (
-        <SummaryReview
+        <>
+          {guest ? (
+            <InfoBanner>
+              To send this to a doctor, sign in or sign up next — your answers stay saved on this phone.
+            </InfoBanner>
+          ) : null}
+          <SummaryReview
           items={reviewItems().map((it) => ({
             question: it.question,
             answer: it.answer,
@@ -306,6 +337,7 @@ export function Runner({
           confirmLabel={t(lang, "send")}
           onConfirm={send}
         />
+        </>
       ) : null}
 
       {error ? <p role="alert">{error}</p> : null}

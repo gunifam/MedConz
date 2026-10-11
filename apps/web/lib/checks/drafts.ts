@@ -38,3 +38,40 @@ export function clearLocalDrafts() {
     /* ignore */
   }
 }
+
+// Guest check (no account yet): the whole draft lives on this phone until
+// sign in/up, then /check/finish moves it to the server.
+export type GuestCheck = {
+  complaint: string;
+  language: string;
+  caregiver: Record<string, unknown>;
+  answers: Record<string, unknown>;
+  updatedAt: string;
+};
+
+const GUEST_KEY = "medconz:guest-check";
+
+export function saveGuest(g: GuestCheck) {
+  try {
+    localStorage.setItem(GUEST_KEY, JSON.stringify(g));
+  } catch {
+    /* ignore */
+  }
+}
+
+export function loadGuest(): GuestCheck | null {
+  try {
+    const raw = localStorage.getItem(GUEST_KEY);
+    return raw ? (JSON.parse(raw) as GuestCheck) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function clearGuest() {
+  try {
+    localStorage.removeItem(GUEST_KEY);
+  } catch {
+    /* ignore */
+  }
+}

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { MedConzStyles } from "@medconz/ui";
 import { MobileTabs } from "@/components/mobile-tabs";
-import { ProfileMenu } from "@/components/profile-menu";
+import { TopBar } from "@/components/top-bar";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <MedConzStyles />
-        <ProfileMenu />
+        <TopBar />
         {children}
         <MobileTabs />
       </body>

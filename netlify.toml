@@ -1,0 +1,21 @@
+# Netlify: auto-deploy from GitHub. Production = main branch,
+# previews = every other branch/push.
+[build]
+  base = "apps/web"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Required site env vars (Netlify dashboard → Site settings → Environment):
+#   DATABASE_URL          pooled Neon URL, with ?sslmode=require
+#   BETTER_AUTH_SECRET    32+ char secret (generate a NEW one, not the local one)
+#   BETTER_AUTH_URL       https://<your-site>.netlify.app
+#   NEXT_PUBLIC_APP_URL   https://<your-site>.netlify.app
+#   TRUSTED_ORIGINS       https://<your-site>.netlify.app
+# Optional (same meanings as local .env): ESPEES_NGN_RATE, CONSULT_PRICE_NGN,
+# SUPPORTED_CRYPTOS, CRYPTO_QUOTE_TTL_MINUTES, FOLLOWUP_FREE_HOURS,
+# FOLLOWUP_CHECKIN_HOURS, AVG_CONSULT_MINUTES, LONG_WAIT_MINUTES,
+# READY_REMINDER_SECONDS, SNOOZE_MINUTES, INFO_REQUEST_TTL_MINUTES,
+# TIMELINE_SHARE_DEFAULT_DAYS, R2_* (only when storage is wired)

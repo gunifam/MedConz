@@ -44,6 +44,9 @@ export default function LoginPage() {
         </button>
       </form>
       <p>
+        <a className="mc-link" href="/forgot-password">Forgot password?</a>
+      </p>
+      <p>
         No account yet? <a className="mc-link" href="/signup">Create one</a>.
       </p>
     </main>

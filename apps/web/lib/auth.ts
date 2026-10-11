@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { phoneNumber } from "better-auth/plugins";
 import { db } from "./db";
+import { sendMail } from "./email";
 import * as schema from "@medconz/db";
 
 export const auth = betterAuth({
@@ -19,7 +20,17 @@ export const auth = betterAuth({
       verification: schema.verification,
     },
   }),
-  emailAndPassword: { enabled: true, requireEmailVerification: false },
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: false,
+    sendResetPassword: async ({ user, url }) => {
+      await sendMail({
+        to: user.email,
+        subject: "Reset your MedConz password",
+        text: `You asked to reset your password. Use this link within 1 hour:\n\n${url}\n\nIf you did not ask, ignore this message.`,
+      });
+    },
+  },
   user: {
     additionalFields: {
       role: { type: "string", defaultValue: "patient", required: false },

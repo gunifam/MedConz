@@ -1,18 +1,18 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
-// Dev APK loads the MedConz server over the LAN (phone + PC on the same
-// WiFi). Production APKs point this at the hosted https backend instead.
-// NOTE: change DEV_HOST to this PC's WiFi IPv4 if it moves.
-const DEV_HOST = process.env.MEDCONZ_DEV_HOST ?? "10.251.191.190";
-const DEV_PORT = process.env.MEDCONZ_DEV_PORT ?? "3100";
+// The APK loads MedConz from an https backend (no PC needed on the phone).
+// Default is the live site. For LAN testing against a dev server instead:
+//   server: { url: "http://<PC_WIFI_IP>:3100", cleartext: true }
+const LIVE_URL =
+  process.env.MEDCONZ_APP_URL ?? "https://medconz-app.netlify.app";
 
 const config: CapacitorConfig = {
   appId: "com.medconz.app",
   appName: "MedConz",
   webDir: "capacitor-stub",
   server: {
-    url: `http://${DEV_HOST}:${DEV_PORT}`,
-    cleartext: true,
+    url: LIVE_URL,
+    cleartext: false,
   },
 };
 
